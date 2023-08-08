@@ -1,1 +1,24 @@
-hello
+pipeline {
+    agent any
+
+ 
+
+    stages {
+        stage('API Call') {
+            steps {
+                script {
+                    def apiUrl = 'https://jsonplaceholder.typicode.com/todos/1'
+                    def apiResponse = sh(returnStdout: true, script: "curl -s $apiUrl")
+
+ 
+
+                    echo "API Response:\n${apiResponse}"
+
+ 
+
+                    // You can parse and process the API response further here
+                }
+            }
+        }
+    }
+}
