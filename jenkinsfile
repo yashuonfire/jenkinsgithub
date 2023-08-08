@@ -4,21 +4,19 @@ pipeline {
  
 
     stages {
-        stage('API Call') {
+        stage('API GET Request') {
             steps {
                 script {
                     def apiUrl = 'https://jsonplaceholder.typicode.com/todos/1'
-                    def apiResponse = sh(returnStdout: true, script: "curl -s $apiUrl")
+                    def response = http(url: apiUrl, method: 'GET')
 
  
 
-                    echo "API Response:\n${apiResponse}"
-
- 
-
-                    // You can parse and process the API response further here
+                    echo "API GET Response Code: ${response.status}"
+                    echo "API GET Response Body: ${response.content}"
                 }
             }
         }
+
     }
 }
