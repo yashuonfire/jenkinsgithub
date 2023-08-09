@@ -1,22 +1,16 @@
 pipeline {
     agent any
-
- 
-
     stages {
-        stage('API GET Request') {
+        stage('Hello') {
             steps {
                 script {
-                    def apiUrl = 'https://jsonplaceholder.typicode.com/todos/1'
-                    def response = http(url: apiUrl, method: 'GET')
-
- 
-
-                    echo "API GET Response Code: ${response.status}"
-                    echo "API GET Response Body: ${response.content}"
-                }
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Hello from main branch'
+                    }  else {
+                        sh "echo 'Hello from ${env.BRANCH_NAME} branch!'"
+                    }
+                    }
             }
         }
-
     }
 }
